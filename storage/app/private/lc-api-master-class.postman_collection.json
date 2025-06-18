@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "30f620f8-3d42-416d-9426-c75290782ce4",
+		"name": "lc-api-master-class",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13714277"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "Tickets",
+					"item": [
+						{
+							"name": "Get all tickets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMTQ2YjZjNmNmNmViMmQ2Y2MzNDQ0YzRmMDg5MDVhOTJiOTk3MTM2YzA1YjhhYmQ3NTkxNmM4NDM5YTBjZjc1NDUzOWQ5ZTkxZDA4ZTA1MzIiLCJpYXQiOjE3NDM0MjYzODMuNDY4OTI3LCJuYmYiOjE3NDM0MjYzODMuNDY4OTMsImV4cCI6MTc3NDk2MjM4My40NjAyNDksInN1YiI6IiIsInNjb3BlcyI6W119.I9TV8dkcyTrLccNWD52kEutQ-EOGxRuA2ccze2tO7klTNy5HKCIL17e9lbcxCpjfNq7UaKHVDH5FQbBc7f1MJU89fKbQs4xJdwD6ttUqG8IXVg9_Z_bP2Ois9V4FCailzisBvLfGw0AdkWJpCBLAZ0qZBXVhtmrlpUc_d0ljkQezocxbubBcdFg6-OLz-7eAV51wzpHdpWnY_Qozg2NtWkkjVTjExyKq0uuiD-zyxRxXAeg0J4juvnC36u2Apx25jK-Of1PI_yzWhfyr7FUU5L_El8bGu1XK98wkXWtnCBsRUovJChnC0JWADIIlRzS5l3Ix-YTQA_AkUjdM4KfSggkYoe3dBOqDiBKbql3N50mPvt0a_s3b5yqjeSjAu1RCu-WZWXbz5l9UVPy_jlD8VOvdLpydiydGZEBosZEMO7CuMqVWvJ9WMNtuuegrbbEGQ4eSTlMWTQRNrI-98LuA8cgpzCqWgbNJcK-YvcXQpiUDUSrRp1HPzyOg6EshFsEKBHUUfEDXdfuA_OI8NtdK-sxXznEX8J7nZDBWzC0KF1eedbonjIIIPfMraoUazSD3kBO87DF2YB5_boLKPhawtS39v15DkoKflvD27QhjUmnj2KI9-6j3apQjacMITtICPtJRXa5dmAAhwdWBDUNA-2nxEFu2p_aeGDihUyrpQJ4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/tickets",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tickets"
+									],
+									"query": [
+										{
+											"key": "exclusions",
+											"value": "eiusmod",
+											"description": "List of survey ids to exclude in response separated by a comma",
+											"disabled": true
+										},
+										{
+											"key": "version",
+											"value": "3435258",
+											"description": "Application version as integer -> 1.4.0 = 140",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
