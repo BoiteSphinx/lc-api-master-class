@@ -7,17 +7,18 @@ use App\Http\Requests\Api\V1\{
     StoreTicketRequest,
     UpdateTicketRequest,
 };
+use App\Http\Resources\V1\TicketResource;
 use App\Models\Ticket;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Collection
+    public function index(): JsonResource
     {
-        return Ticket::all();
+        return TicketResource::collection(Ticket::paginate());
     }
 
     /**
@@ -31,9 +32,9 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ticket $ticket)
+    public function show(Ticket $ticket): JsonResource
     {
-        //
+        return new TicketResource($ticket);
     }
 
     /**

@@ -28,7 +28,7 @@
                   "type": "bearer",
                   "bearer": {
                     "key": "token",
-                    "value": "2|SSnrEKx7ymKrl2I9ni8LZW9J2acrTWHjnhTPGq4Cd8f13460",
+                    "value": "{{BEARER}}",
                     "type": "string"
                   }
                 },
@@ -43,6 +43,45 @@
                     "api",
                     "v1",
                     "tickets"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Get ticket",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "disabled": false,
+                    "type": "default"
+                  }
+                ],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "key": "token",
+                    "value": "{{BEARER}}",
+                    "type": "string"
+                  }
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
                   ],
                   "query": [],
                   "variable": []
@@ -104,6 +143,43 @@
               ]
             }
           }
+        },
+        {
+          "name": "Logout Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{BEARER}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/logout",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "logout"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
         }
       ]
     }
@@ -115,7 +191,12 @@
       "type": "default"
     },
     {
-      "key": "baseurl",
+      "key": "BEARER",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "ticket_id",
       "value": "",
       "type": "default"
     }
