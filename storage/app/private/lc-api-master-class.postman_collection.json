@@ -16,21 +16,9 @@
               "event": [],
               "request": {
                 "method": "GET",
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json",
-                    "disabled": false,
-                    "type": "default"
-                  }
-                ],
+                "header": [],
                 "auth": {
-                  "type": "bearer",
-                  "bearer": {
-                    "key": "token",
-                    "value": "{{BEARER}}",
-                    "type": "string"
-                  }
+                  "type": "noauth"
                 },
                 "description": "",
                 "url": {
@@ -54,21 +42,9 @@
               "event": [],
               "request": {
                 "method": "GET",
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json",
-                    "disabled": false,
-                    "type": "default"
-                  }
-                ],
+                "header": [],
                 "auth": {
-                  "type": "bearer",
-                  "bearer": {
-                    "key": "token",
-                    "value": "{{BEARER}}",
-                    "type": "string"
-                  }
+                  "type": "noauth"
                 },
                 "description": "",
                 "url": {
@@ -82,6 +58,64 @@
                     "v1",
                     "tickets",
                     "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Get all users",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Get user",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users/{{user_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "{{user_id}}"
                   ],
                   "query": [],
                   "variable": []
@@ -191,12 +225,17 @@
       "type": "default"
     },
     {
+      "key": "ticket_id",
+      "value": "",
+      "type": "default"
+    },
+    {
       "key": "BEARER",
       "value": "",
       "type": "default"
     },
     {
-      "key": "ticket_id",
+      "key": "user_id",
       "value": "",
       "type": "default"
     }
