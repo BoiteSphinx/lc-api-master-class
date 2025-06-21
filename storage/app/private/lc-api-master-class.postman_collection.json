@@ -36,6 +36,22 @@
                     {
                       "key": "include",
                       "value": "author"
+                    },
+                    {
+                      "key": "filter[createdAt]",
+                      "value": "2025-06-18,2025-06-22"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "C,X"
+                    },
+                    {
+                      "key": "filter[title]",
+                      "value": "*iure*"
+                    },
+                    {
+                      "key": "filter[updatedAt]",
+                      "value": "2025-06-18,2025-06-22"
                     }
                   ],
                   "variable": []
