@@ -22,7 +22,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets",
+                  "raw": "{{baseUrl}}/api/v1/tickets?include=author",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -30,9 +30,14 @@
                   "path": [
                     "api",
                     "v1",
-                    "tickets"
+                    "tickets?include=author"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "author"
+                    }
+                  ],
                   "variable": []
                 }
               }
@@ -90,7 +95,12 @@
                     "v1",
                     "users"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
                   "variable": []
                 }
               }
@@ -117,7 +127,12 @@
                     "users",
                     "{{user_id}}"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
                   "variable": []
                 }
               }
