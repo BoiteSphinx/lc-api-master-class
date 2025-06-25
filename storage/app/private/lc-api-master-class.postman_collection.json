@@ -6,6 +6,97 @@
   },
   "item": [
     {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/login",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "howell.chase@example.org",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Logout Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{BEARER}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/logout",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "logout"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "v1",
       "item": [
         {
@@ -101,7 +192,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/users",
+                  "raw": "{{baseUrl}}/api/v1/authors",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -109,7 +200,7 @@
                   "path": [
                     "api",
                     "v1",
-                    "users"
+                    "authors"
                   ],
                   "query": [
                     {
@@ -132,7 +223,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/users/{{user_id}}",
+                  "raw": "{{baseUrl}}/api/v1/authors/{{user_id}}",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -140,10 +231,47 @@
                   "path": [
                     "api",
                     "v1",
-                    "users",
+                    "authors",
                     "{{user_id}}"
                   ],
                   "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Get user's tickets",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/authors/{{user_id}}/tickets",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "authors",
+                    "{{user_id}}",
+                    "tickets"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[status]",
+                      "value": "C,X"
+                    },
                     {
                       "key": "include",
                       "value": "tickets"
@@ -156,97 +284,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "Authentication",
-      "item": [
-        {
-          "name": "Login Request",
-          "event": [],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "disabled": false,
-                "type": "default"
-              }
-            ],
-            "auth": {
-              "type": "noauth"
-            },
-            "description": "",
-            "url": {
-              "raw": "{{baseUrl}}/api/login",
-              "protocol": "",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "login"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "email",
-                  "value": "howell.chase@example.org",
-                  "disabled": false,
-                  "type": "default"
-                },
-                {
-                  "key": "password",
-                  "value": "password",
-                  "disabled": false,
-                  "type": "default"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Logout Request",
-          "event": [],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "disabled": false,
-                "type": "default"
-              }
-            ],
-            "auth": {
-              "type": "bearer",
-              "bearer": {
-                "key": "token",
-                "value": "{{BEARER}}",
-                "type": "string"
-              }
-            },
-            "description": "",
-            "url": {
-              "raw": "{{baseUrl}}/api/logout",
-              "protocol": "",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "logout"
-              ],
-              "query": [],
-              "variable": []
-            }
-          }
-        }
-      ]
     }
   ],
   "variable": [
@@ -256,12 +293,12 @@
       "type": "default"
     },
     {
-      "key": "ticket_id",
+      "key": "BEARER",
       "value": "",
       "type": "default"
     },
     {
-      "key": "BEARER",
+      "key": "ticket_id",
       "value": "",
       "type": "default"
     },
