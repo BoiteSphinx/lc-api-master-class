@@ -113,7 +113,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets?include=author",
+                  "raw": "{{baseUrl}}/api/v1/tickets?sort=-createdAt",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -121,9 +121,13 @@
                   "path": [
                     "api",
                     "v1",
-                    "tickets?include=author"
+                    "tickets?sort=-createdAt"
                   ],
                   "query": [
+                    {
+                      "key": "sort",
+                      "value": "-createdAt"
+                    },
                     {
                       "key": "include",
                       "value": "author"
@@ -192,7 +196,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/authors",
+                  "raw": "{{baseUrl}}/api/v1/authors?filter[id]=1,6,10",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -200,9 +204,13 @@
                   "path": [
                     "api",
                     "v1",
-                    "authors"
+                    "authors?filter[id]=1,6,10"
                   ],
                   "query": [
+                    {
+                      "key": "filter[id]",
+                      "value": "1,6,10"
+                    },
                     {
                       "key": "include",
                       "value": "tickets"
@@ -255,7 +263,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/authors/{{user_id}}/tickets",
+                  "raw": "{{baseUrl}}/api/v1/authors/{{user_id}}/tickets?filter[status]=C,X&sort=-title",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -265,12 +273,16 @@
                     "v1",
                     "authors",
                     "{{user_id}}",
-                    "tickets"
+                    "tickets?filter[status]=C,X&sort=-title"
                   ],
                   "query": [
                     {
                       "key": "filter[status]",
                       "value": "C,X"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-title"
                     },
                     {
                       "key": "include",
