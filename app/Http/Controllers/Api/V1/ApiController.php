@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Traits\ApiResponses;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 
 class ApiController extends Controller
@@ -32,7 +33,7 @@ class ApiController extends Controller
         return in_array(strtolower($relationship), $includeValues);
     }
 
-    public function isAble($ability, $targetModel): void
+    public function isAble(string $ability, ?Model $targetModel): void
     {
         Gate::authorize($ability, [$targetModel, $this->policyClass]);
     }
