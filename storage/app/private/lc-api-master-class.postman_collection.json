@@ -6,97 +6,6 @@
   },
   "item": [
     {
-      "name": "Authentication",
-      "item": [
-        {
-          "name": "Login Request",
-          "event": [],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "disabled": false,
-                "type": "default"
-              }
-            ],
-            "auth": {
-              "type": "noauth"
-            },
-            "description": "",
-            "url": {
-              "raw": "{{baseUrl}}/api/login",
-              "protocol": "",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "login"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "email",
-                  "value": "howell.chase@example.org",
-                  "disabled": false,
-                  "type": "default"
-                },
-                {
-                  "key": "password",
-                  "value": "password",
-                  "disabled": false,
-                  "type": "default"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Logout Request",
-          "event": [],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "disabled": false,
-                "type": "default"
-              }
-            ],
-            "auth": {
-              "type": "bearer",
-              "bearer": {
-                "key": "token",
-                "value": "{{BEARER}}",
-                "type": "string"
-              }
-            },
-            "description": "",
-            "url": {
-              "raw": "{{baseUrl}}/api/logout",
-              "protocol": "",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "logout"
-              ],
-              "query": [],
-              "variable": []
-            }
-          }
-        }
-      ]
-    },
-    {
       "name": "v1",
       "item": [
         {
@@ -179,6 +88,41 @@
                   "variable": []
                 }
               }
+            },
+            {
+              "name": "Create ticket",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"First Ticket\",\n      \"description\": \"This is the first ticket we created\",\n      \"status\": \"A\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 1 }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
             }
           ]
         },
@@ -211,38 +155,6 @@
                       "key": "filter[id]",
                       "value": "1,6,10"
                     },
-                    {
-                      "key": "include",
-                      "value": "tickets"
-                    }
-                  ],
-                  "variable": []
-                }
-              }
-            },
-            {
-              "name": "Get user",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "{{baseUrl}}/api/v1/authors/{{user_id}}",
-                  "protocol": "",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "authors",
-                    "{{user_id}}"
-                  ],
-                  "query": [
                     {
                       "key": "include",
                       "value": "tickets"
@@ -292,8 +204,166 @@
                   "variable": []
                 }
               }
+            },
+            {
+              "name": "Get user",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/authors/{{user_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "authors",
+                    "{{user_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Create ticket for user",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "authors",
+                    "{{author_id}}",
+                    "tickets"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Second Ticket\",\n      \"description\": \"This is the second ticket we created\",\n      \"status\": \"A\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/login",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "howell.chase@example.org",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Logout Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{BEARER}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/logout",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "logout"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
         }
       ]
     }
@@ -305,17 +375,22 @@
       "type": "default"
     },
     {
-      "key": "BEARER",
-      "value": "",
-      "type": "default"
-    },
-    {
       "key": "ticket_id",
       "value": "",
       "type": "default"
     },
     {
       "key": "user_id",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "author_id",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "BEARER",
       "value": "",
       "type": "default"
     }
