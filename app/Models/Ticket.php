@@ -14,7 +14,7 @@ class Ticket extends Model
     /** @use HasFactory<\Database\Factories\TicketFactory> */
     use HasFactory;
 
-    protected array $fillable = ['title', 'status', 'description', 'user_id'];
+    protected $fillable = ['title', 'status', 'description', 'user_id'];
 
     public function author(): BelongsTo
     {
