@@ -123,6 +123,78 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Delete Ticket",
+              "event": [],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"First Ticket\",\n      \"description\": \"This is the first ticket we created\",\n      \"status\": \"A\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 1 }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Replace ticket",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Changed title\",\n      \"description\": \"Changed description\",\n      \"status\": \"C\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 2 }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
             }
           ]
         },
@@ -271,6 +343,83 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Second Ticket\",\n      \"description\": \"This is the second ticket we created\",\n      \"status\": \"A\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete User Ticket",
+              "event": [],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "authors",
+                    "{{author_id}}",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Replace ticket for user",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "authors",
+                    "{{author_id}}",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"PUT Request works\",\n      \"description\": \"Implement replace method\",\n      \"status\": \"C\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 2 }\n      }\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
