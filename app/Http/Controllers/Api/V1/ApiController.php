@@ -33,7 +33,7 @@ class ApiController extends Controller
         return in_array(strtolower($relationship), $includeValues);
     }
 
-    public function isAble(string $ability, ?Model $targetModel): void
+    public function isAble(string $ability, $targetModel = null): void
     {
         Gate::authorize($ability, [$targetModel, $this->policyClass]);
     }
