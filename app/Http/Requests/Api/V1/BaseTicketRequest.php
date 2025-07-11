@@ -12,16 +12,16 @@ class BaseTicketRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function mappedAttributes(): array
+    public function mappedAttributes(array $otherAttributes = []): array
     {
-        $attributeMap = [
+        $attributeMap = array_merge([
             'data.attributes.title' => 'title',
             'data.attributes.description' => 'description',
             'data.attributes.status' => 'status',
             'data.attributes.createdAt' => 'created_at',
             'data.attributes.updatedAt' => 'updated_at',
             'data.relationships.author.data.id' => 'user_id',
-        ];
+        ], $otherAttributes);
 
         $attributesToUpdate = [];
         foreach ($attributeMap as $key => $attribute) {
