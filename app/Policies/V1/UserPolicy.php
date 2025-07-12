@@ -30,7 +30,7 @@ class UserPolicy
         return $user->tokenCan(Abilities::ReplaceUser);
     }
 
-    public function store(User $user, User $model): bool
+    public function store(User $user): bool
     {
         return $user->tokenCan(Abilities::CreateUser);
     }
