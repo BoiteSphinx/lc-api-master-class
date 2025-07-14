@@ -6,91 +6,97 @@
   },
   "item": [
     {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/login",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "manager@manager.com",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Logout Request",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{BEARER}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/api/logout",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "logout"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "v1",
       "item": [
         {
-          "name": "Tickets",
+          "name": "Authors",
           "item": [
             {
-              "name": "Get all tickets",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets?sort=-createdAt",
-                  "protocol": "",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "tickets?sort=-createdAt"
-                  ],
-                  "query": [
-                    {
-                      "key": "sort",
-                      "value": "-createdAt"
-                    },
-                    {
-                      "key": "include",
-                      "value": "author"
-                    },
-                    {
-                      "key": "filter[createdAt]",
-                      "value": "2025-06-18,2025-06-22"
-                    },
-                    {
-                      "key": "filter[status]",
-                      "value": "C,X"
-                    },
-                    {
-                      "key": "filter[title]",
-                      "value": "*iure*"
-                    },
-                    {
-                      "key": "filter[updatedAt]",
-                      "value": "2025-06-18,2025-06-22"
-                    }
-                  ],
-                  "variable": []
-                }
-              }
-            },
-            {
-              "name": "Get ticket",
-              "event": [],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
-                  "protocol": "",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "tickets",
-                    "{{ticket_id}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                }
-              }
-            },
-            {
-              "name": "Create ticket",
+              "name": "Create ticket for user",
               "event": [],
               "request": {
                 "method": "POST",
@@ -100,7 +106,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets",
+                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -108,14 +114,21 @@
                   "path": [
                     "api",
                     "v1",
+                    "authors",
+                    "{{author_id}}",
                     "tickets"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
                   "variable": []
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"First Ticket\",\n      \"description\": \"This is the first ticket we created\",\n      \"status\": \"A\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 1 }\n      }\n    }\n  }\n}",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Second Ticket\",\n      \"description\": \"This is the second ticket we created\",\n      \"status\": \"A\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -125,7 +138,7 @@
               }
             },
             {
-              "name": "Delete Ticket",
+              "name": "Delete User Ticket",
               "event": [],
               "request": {
                 "method": "DELETE",
@@ -135,7 +148,7 @@
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets/{{ticket_id}}",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -143,100 +156,21 @@
                   "path": [
                     "api",
                     "v1",
+                    "authors",
+                    "{{author_id}}",
                     "tickets",
                     "{{ticket_id}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"First Ticket\",\n      \"description\": \"This is the first ticket we created\",\n      \"status\": \"A\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 1 }\n      }\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
                     }
-                  }
+                  ],
+                  "variable": []
                 }
               }
             },
-            {
-              "name": "Replace ticket",
-              "event": [],
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
-                  "protocol": "",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "tickets",
-                    "{{ticket_id}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Changed title\",\n      \"description\": \"Changed description\",\n      \"status\": \"C\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 2 }\n      }\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "name": "Patch ticket",
-              "event": [],
-              "request": {
-                "method": "PATCH",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
-                  "protocol": "",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "tickets",
-                    "{{ticket_id}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Changed title 3\",\n      \"status\": \"C\"\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "name": "Users",
-          "item": [
             {
               "name": "Get all users",
               "event": [],
@@ -346,52 +280,10 @@
               }
             },
             {
-              "name": "Create ticket for user",
+              "name": "Patch ticket for user",
               "event": [],
               "request": {
-                "method": "POST",
-                "header": [],
-                "auth": {
-                  "type": "noauth"
-                },
-                "description": "",
-                "url": {
-                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets",
-                  "protocol": "",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "authors",
-                    "{{author_id}}",
-                    "tickets"
-                  ],
-                  "query": [
-                    {
-                      "key": "include",
-                      "value": "tickets"
-                    }
-                  ],
-                  "variable": []
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Second Ticket\",\n      \"description\": \"This is the second ticket we created\",\n      \"status\": \"A\"\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "name": "Delete User Ticket",
-              "event": [],
-              "request": {
-                "method": "DELETE",
+                "method": "PATCH",
                 "header": [],
                 "auth": {
                   "type": "noauth"
@@ -418,6 +310,15 @@
                     }
                   ],
                   "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"PATCH Request works\",\n      \"description\": \"Implement update method\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
                 }
               }
             },
@@ -463,19 +364,24 @@
                   }
                 }
               }
-            },
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
             {
-              "name": "Patch ticket for user",
+              "name": "Create user",
               "event": [],
               "request": {
-                "method": "PATCH",
+                "method": "POST",
                 "header": [],
                 "auth": {
                   "type": "noauth"
                 },
                 "description": "",
                 "url": {
-                  "raw": "{{baseUrl}}/api/v1/authors/{{author_id}}/tickets/{{ticket_id}}",
+                  "raw": "{{baseUrl}}/api/v1/users",
                   "protocol": "",
                   "host": [
                     "{{baseUrl}}"
@@ -483,10 +389,7 @@
                   "path": [
                     "api",
                     "v1",
-                    "authors",
-                    "{{author_id}}",
-                    "tickets",
-                    "{{ticket_id}}"
+                    "users"
                   ],
                   "query": [
                     {
@@ -498,7 +401,414 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"PATCH Request works\",\n      \"description\": \"Implement update method\"\n    }\n  }\n}",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"My User\",\n      \"email\": \"user@user.com\",\n      \"password\": \"password\",\n      \"isManager\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete user",
+              "event": [],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users/{{user_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "{{user_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Get all users",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[id]",
+                      "value": "1,6,10"
+                    },
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Get user",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users/{{user_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "{{user_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Patch user",
+              "event": [],
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users/{{user_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "{{user_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"My user's new name\",\n      \"isManager\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Replace user",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/users/{{user_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "{{user_id}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "tickets"
+                    }
+                  ],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"My User\",\n      \"email\": \"user@user.com\",\n      \"password\": \"password\",\n      \"isManager\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tickets",
+          "item": [
+            {
+              "name": "Create ticket",
+              "event": [],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"First Ticket\",\n      \"description\": \"This is the first ticket we created\",\n      \"status\": \"A\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 1 }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Ticket",
+              "event": [],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"First Ticket\",\n      \"description\": \"This is the first ticket we created\",\n      \"status\": \"A\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 1 }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get all tickets",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets?sort=-createdAt",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets?sort=-createdAt"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "-createdAt"
+                    },
+                    {
+                      "key": "include",
+                      "value": "author"
+                    },
+                    {
+                      "key": "filter[createdAt]",
+                      "value": "2025-06-18,2025-06-22"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "C,X"
+                    },
+                    {
+                      "key": "filter[title]",
+                      "value": "*iure*"
+                    },
+                    {
+                      "key": "filter[updatedAt]",
+                      "value": "2025-06-18,2025-06-22"
+                    }
+                  ],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Get ticket",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                }
+              }
+            },
+            {
+              "name": "Patch ticket",
+              "event": [],
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Changed title 3\",\n      \"status\": \"C\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Replace ticket",
+              "event": [],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "auth": {
+                  "type": "noauth"
+                },
+                "description": "",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/tickets/{{ticket_id}}",
+                  "protocol": "",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"Changed title\",\n      \"description\": \"Changed description\",\n      \"status\": \"C\"\n    },\n    \"relationships\": {\n      \"author\": {\n        \"data\": { \"id\": 2 }\n      }\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -510,95 +820,21 @@
           ]
         }
       ]
-    },
-    {
-      "name": "Authentication",
-      "item": [
-        {
-          "name": "Login Request",
-          "event": [],
-          "request": {
-            "method": "POST",
-            "header": [],
-            "auth": {
-              "type": "noauth"
-            },
-            "description": "",
-            "url": {
-              "raw": "{{baseUrl}}/api/login",
-              "protocol": "",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "login"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "email",
-                  "value": "howell.chase@example.org",
-                  "disabled": false,
-                  "type": "default"
-                },
-                {
-                  "key": "password",
-                  "value": "password",
-                  "disabled": false,
-                  "type": "default"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Logout Request",
-          "event": [],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "disabled": false,
-                "type": "default"
-              }
-            ],
-            "auth": {
-              "type": "bearer",
-              "bearer": {
-                "key": "token",
-                "value": "{{BEARER}}",
-                "type": "string"
-              }
-            },
-            "description": "",
-            "url": {
-              "raw": "{{baseUrl}}/api/logout",
-              "protocol": "",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "logout"
-              ],
-              "query": [],
-              "variable": []
-            }
-          }
-        }
-      ]
     }
   ],
   "variable": [
     {
       "key": "baseUrl",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "BEARER",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "author_id",
       "value": "",
       "type": "default"
     },
@@ -609,16 +845,6 @@
     },
     {
       "key": "user_id",
-      "value": "",
-      "type": "default"
-    },
-    {
-      "key": "author_id",
-      "value": "",
-      "type": "default"
-    },
-    {
-      "key": "BEARER",
       "value": "",
       "type": "default"
     }
